@@ -1,0 +1,12 @@
+.env
+# Python / tooling
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.terraform/
+*.tfstate*
+
+# Local runtime state (cache DB, budget counter, traces)
+.migratelens/

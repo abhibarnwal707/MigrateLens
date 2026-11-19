@@ -57,6 +57,8 @@ FILE_RE = re.compile(
     r"|cfg|ini|properties|xml|gradle|txt|md|template)|(?:[\w.-]+/)*Dockerfile[\w.-]*)"
     r"(?::(\d+))?(?![\w/])"
 )
+# Capitalised single-word names like "Moment.js" are libraries, not files
+LIB_NAME = re.compile(r"[A-Z][A-Za-z0-9]*\.js")
 NOT_FILES = {"node.js", "next.js", "vue.js", "express.js", "nuxt.js"}
 DOLLAR_RE = re.compile(r"\$\s?\d")
 
@@ -141,7 +143,7 @@ def check_plan(plan: str, inventory: dict, repo_root: str | Path) -> GuardrailRe
     cited: set[tuple[str, str | None]] = set()
     for m in FILE_RE.finditer(plan):
         path, line = m.group(1).removeprefix("./"), m.group(2)
-        if path.lower() in NOT_FILES or (path, line) in cited:
+        if path.lower() in NOT_FILES or LIB_NAME.fullmatch(path) or (path, line) in cited:
             continue
         cited.add((path, line))
         checked += 1

@@ -1,0 +1,30 @@
+{
+  "app": "sqs-max-concurrency",
+  "mode": "baseline",
+  "human_reviewed": true,
+  "truncated": false,
+  "tokens": 6804,
+  "retries": 0,
+  "llm_calls": 1,
+  "first_draft_violations": 1,
+  "first_draft_items": 27,
+  "invented_rate": 0.037037037037037035,
+  "violation_kinds": [
+    "gcp_resource"
+  ],
+  "violations": [
+    {
+      "kind": "gcp_resource",
+      "item": "Cloud Functions"
+    }
+  ],
+  "service_precision": 1.0,
+  "service_recall": 1.0,
+  "service_fp": [],
+  "service_fn": [],
+  "mapping_accuracy": 1.0,
+  "mapping_wrong": [],
+  "risk_coverage": 1.0,
+  "risks_missed": [],
+  "wall_seconds": 9.4
+}

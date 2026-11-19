@@ -50,3 +50,9 @@ def test_prefix_forms_and_aliases_count_as_the_same_service():
         "Amazon S3 and AWS Simple Queue Service become Cloud Storage and Pub/Sub.", INV, FX
     )
     assert r.ok, r.feedback()
+
+
+def test_capitalised_library_names_are_not_treated_as_files():
+    r = check_plan("S3 is used (app.py:5); the UI uses Moment.js and Node.js.", INV, FX)
+    assert r.ok, r.feedback()
+    assert ("file", "index.js") in kinds(check_plan("see index.js:1 for S3", INV, FX))

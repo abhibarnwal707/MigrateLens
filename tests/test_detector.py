@@ -65,3 +65,14 @@ def test_reader_skips_binaries_and_rejects_big_repos(tmp_path, monkeypatch):
     monkeypatch.setattr("migratelens.tools.repo_reader.MAX_TOTAL_BYTES", 3)
     with pytest.raises(RepoTooLarge):
         list_files(tmp_path)
+
+
+def test_sam_resources_and_event_types():
+    s = by_service(detect_repo(FX / "sam_app"))
+    assert {"Lambda", "SQS", "API Gateway", "DynamoDB"} == set(s)
+    assert s["Lambda"]["evidence"][0]["line"] == 4
+
+
+def test_cdk_python_imports_map_to_services():
+    s = by_service(detect_repo(FX / "cdk_app"))
+    assert {"Lambda", "S3", "CloudWatch"} == set(s)

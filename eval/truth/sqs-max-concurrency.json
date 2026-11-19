@@ -1,0 +1,67 @@
+{
+  "app": "sqs-max-concurrency",
+  "source": "https://github.com/aws-samples/aws-lambda-amazon-sqs-max-concurrency",
+  "commit": "98ee964d8775c7348dbf562f30f62903129e28af",
+  "license": "MIT-0",
+  "synthetic": false,
+  "human_reviewed": true,
+  "review_note": "First draft from reading the repo; not yet confirmed by the project owner. Results only count once human_reviewed is true.",
+  "services_in_scope": [
+    "SQS",
+    "Lambda",
+    "CloudWatch"
+  ],
+  "services_out_of_scope": [],
+  "not_used_but_plausible": [
+    "SNS",
+    "DynamoDB"
+  ],
+  "expected_mapping": {
+    "SQS": [
+      "Pub/Sub"
+    ],
+    "Lambda": [
+      "Cloud Run functions",
+      "Cloud Run"
+    ],
+    "CloudWatch": [
+      "Cloud Logging",
+      "Cloud Monitoring"
+    ]
+  },
+  "must_mention_risks": [
+    {
+      "id": "r1",
+      "text": "Lambda max/reserved concurrency for an SQS event source has no direct Pub/Sub equivalent; concurrency is controlled differently (Cloud Run max instances and concurrency, Pub/Sub flow control)",
+      "keywords_any": [
+        "concurrency"
+      ]
+    },
+    {
+      "id": "r2",
+      "text": "SQS visibility timeout and redrive policy to dead-letter queues map to Pub/Sub ack deadlines and dead-letter topics, with different semantics",
+      "keywords_any": [
+        "visibility timeout",
+        "ack deadline",
+        "dead-letter",
+        "dead letter"
+      ]
+    },
+    {
+      "id": "r3",
+      "text": "Lambda event-source mapping from SQS must be re-created as a Pub/Sub subscription (push or pull) to the new service",
+      "keywords_any": [
+        "subscription",
+        "trigger",
+        "event source"
+      ]
+    },
+    {
+      "id": "r4",
+      "text": "The CloudWatch dashboard must be rebuilt in Cloud Monitoring",
+      "keywords_any": [
+        "dashboard"
+      ]
+    }
+  ]
+}

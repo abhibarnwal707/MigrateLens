@@ -1,0 +1,80 @@
+{
+  "app": "sam-messaging",
+  "source": "https://github.com/aws-samples/aws-sam-messaging-services-integration",
+  "commit": "1fd81b29994c2624d1914c1a7a564a78a9db2905",
+  "license": "MIT-0",
+  "synthetic": false,
+  "human_reviewed": true,
+  "review_note": "First draft from reading the repo; not yet confirmed by the project owner. Results only count once human_reviewed is true.",
+  "services_in_scope": [
+    "SQS",
+    "SNS",
+    "EventBridge",
+    "Lambda"
+  ],
+  "services_out_of_scope": [],
+  "not_used_but_plausible": [
+    "DynamoDB",
+    "S3"
+  ],
+  "expected_mapping": {
+    "SQS": [
+      "Pub/Sub"
+    ],
+    "SNS": [
+      "Pub/Sub"
+    ],
+    "EventBridge": [
+      "Cloud Scheduler",
+      "Pub/Sub"
+    ],
+    "Lambda": [
+      "Cloud Run functions",
+      "Cloud Run"
+    ]
+  },
+  "must_mention_risks": [
+    {
+      "id": "r1",
+      "text": "SNS subscription filter policies must be re-expressed as Pub/Sub subscription filters, whose syntax differs",
+      "keywords_any": [
+        "filter"
+      ]
+    },
+    {
+      "id": "r2",
+      "text": "EventBridge event patterns have no direct Cloud equivalent; routing must be approximated with Pub/Sub topics and filters or Cloud Scheduler",
+      "keywords_any": [
+        "event pattern",
+        "pattern",
+        "no direct"
+      ]
+    },
+    {
+      "id": "r3",
+      "text": "Queue and topic resource policies granting cross-service access must be rewritten as IAM bindings",
+      "keywords_any": [
+        "policy",
+        "policies",
+        "iam"
+      ]
+    },
+    {
+      "id": "r4",
+      "text": "The Node.js code uses the AWS SDK (v2) and must be rewritten for Google Cloud client libraries",
+      "keywords_any": [
+        "sdk",
+        "client librar"
+      ]
+    },
+    {
+      "id": "r5",
+      "text": "SNS-to-SQS fan-out becomes a Pub/Sub topic with multiple subscriptions",
+      "keywords_any": [
+        "fan-out",
+        "fanout",
+        "fan out"
+      ]
+    }
+  ]
+}

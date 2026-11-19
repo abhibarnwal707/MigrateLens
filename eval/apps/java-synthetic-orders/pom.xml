@@ -1,0 +1,11 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>example</groupId>
+  <artifactId>orders</artifactId>
+  <version>1.0.0</version>
+  <dependencies>
+    <dependency><groupId>software.amazon.awssdk</groupId><artifactId>s3</artifactId><version>2.25.0</version></dependency>
+    <dependency><groupId>software.amazon.awssdk</groupId><artifactId>dynamodb</artifactId><version>2.25.0</version></dependency>
+    <dependency><groupId>software.amazon.awssdk</groupId><artifactId>sqs</artifactId><version>2.25.0</version></dependency>
+  </dependencies>
+</project>

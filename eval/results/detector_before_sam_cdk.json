@@ -1,0 +1,87 @@
+{
+  "apps": {
+    "iot-sns-sqs-ddb": {
+      "precision": 1.0,
+      "recall": 0.75,
+      "tp": 3,
+      "fp": [],
+      "fn": [
+        "Lambda"
+      ],
+      "human_reviewed": true
+    },
+    "java-synthetic-orders": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "tp": 3,
+      "fp": [],
+      "fn": [],
+      "human_reviewed": true
+    },
+    "priority-mailer-ses": {
+      "precision": 1.0,
+      "recall": 0.5,
+      "tp": 3,
+      "fp": [],
+      "fn": [
+        "CloudWatch",
+        "IAM",
+        "Lambda"
+      ],
+      "human_reviewed": true
+    },
+    "sam-messaging": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "tp": 4,
+      "fp": [],
+      "fn": [],
+      "human_reviewed": true
+    },
+    "sns-email-china": {
+      "precision": 0.9090909090909091,
+      "recall": 1.0,
+      "tp": 10,
+      "fp": [
+        "SSM Parameter Store"
+      ],
+      "fn": [],
+      "human_reviewed": true
+    },
+    "sqs-max-concurrency": {
+      "precision": 1.0,
+      "recall": 0.6666666666666666,
+      "tp": 2,
+      "fp": [],
+      "fn": [
+        "Lambda"
+      ],
+      "human_reviewed": true
+    },
+    "twilio-apigw": {
+      "precision": 1.0,
+      "recall": 0.5,
+      "tp": 2,
+      "fp": [],
+      "fn": [
+        "API Gateway",
+        "Lambda"
+      ],
+      "human_reviewed": true
+    }
+  },
+  "macro_precision": 0.987012987012987,
+  "macro_recall": 0.7738095238095238,
+  "macro_precision_ci95": [
+    0.961038961038961,
+    1.0
+  ],
+  "macro_recall_ci95": [
+    0.619047619047619,
+    0.9285714285714286
+  ],
+  "micro_precision": 0.9642857142857143,
+  "micro_recall": 0.7941176470588235,
+  "n_apps": 7,
+  "note": "detector as committed before SAM/CDK support was added"
+}

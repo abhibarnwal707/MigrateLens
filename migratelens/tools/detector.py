@@ -33,6 +33,22 @@ def canon(raw: str) -> str | None:
     return CANON.get(re.sub(r"[-_.]", "", raw.lower()))
 
 
+# SAM (AWS::Serverless::*) resource types and function event types
+SAM_TYPE = {
+    "function": "Lambda", "layerversion": "Lambda", "api": "API Gateway", "httpapi": "API Gateway",
+    "simpletable": "DynamoDB", "statemachine": "Step Functions",
+}  # fmt: skip
+SAM_EVENT = re.compile(
+    r"^\s+Type:\s*(SQS|SNS|S3|Api|HttpApi|Schedule|DynamoDB|Kinesis|EventBridgeRule|CloudWatchEvent)\s*$"
+)
+SAM_EVENT_SERVICE = {
+    "sqs": "SQS", "sns": "SNS", "s3": "S3", "api": "API Gateway", "httpapi": "API Gateway",
+    "schedule": "EventBridge", "dynamodb": "DynamoDB", "kinesis": "Kinesis",
+    "eventbridgerule": "EventBridge", "cloudwatchevent": "EventBridge",
+}  # fmt: skip
+# CDK imports: `aws_s3 as s3`, `aws_cdk.aws_s3`, `aws-cdk-lib/aws-s3`
+CDK_PY = re.compile(r"\baws_([a-z0-9]+)(?:_[a-z0-9_]+)?\s+as\s+\w+|\baws_cdk\.aws_([a-z0-9]+)")
+CDK_TS = re.compile(r"aws-cdk-lib/aws-([a-z0-9]+)")
 PY_CLIENT = re.compile(r"""\b(?:client|resource)\(\s*['"]([A-Za-z0-9_-]+)['"]""")
 JS_V3 = re.compile(r"""@aws-sdk/(?:client|lib)-([a-z0-9-]+)""")
 JS_V2 = re.compile(r"""\bnew\s+AWS\.([A-Za-z0-9]+)\(""")
@@ -93,6 +109,19 @@ def _scan_file(rel: str, text: str):
         if suffix in (".yml", ".yaml", ".json", ".template") and (m := CFN.search(line)):
             if s := canon(m.group(1)):
                 yield s, i, snip, "high"
+            elif m.group(1) == "Serverless":
+                kind = re.search(r"AWS::Serverless::([A-Za-z]+)", line)
+                if kind and (s := SAM_TYPE.get(kind.group(1).lower())):
+                    yield s, i, snip, "high"
+        if suffix in (".yml", ".yaml", ".template") and (m := SAM_EVENT.match(line)):
+            yield SAM_EVENT_SERVICE[m.group(1).lower()], i, snip, "medium"
+        if suffix == ".py" and ("aws_cdk" in text):
+            for m in CDK_PY.finditer(line):
+                if s := canon(m.group(1) or m.group(2)):
+                    yield s, i, snip, "medium"
+        if suffix in (".ts", ".js") and (m := CDK_TS.search(line)):
+            if s := canon(m.group(1)):
+                yield s, i, snip, "medium"
         if in_sls:
             if re.match(r"^functions\s*:", line):
                 yield "Lambda", i, snip, "high"

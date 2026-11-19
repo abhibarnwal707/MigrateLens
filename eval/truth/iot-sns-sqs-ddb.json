@@ -1,0 +1,79 @@
+{
+  "app": "iot-sns-sqs-ddb",
+  "source": "https://github.com/aws-samples/iot-lambda-sns-sqs-lambda-dynamodb",
+  "commit": "9e262b2f695dde7c9fa135500564af11fd35d295",
+  "license": "MIT-0",
+  "synthetic": false,
+  "human_reviewed": true,
+  "review_note": "First draft from reading the repo; not yet confirmed by the project owner. Results only count once human_reviewed is true.",
+  "services_in_scope": [
+    "SNS",
+    "SQS",
+    "Lambda",
+    "DynamoDB"
+  ],
+  "services_out_of_scope": [
+    "IoT Core"
+  ],
+  "not_used_but_plausible": [
+    "S3",
+    "Kinesis"
+  ],
+  "expected_mapping": {
+    "SNS": [
+      "Pub/Sub"
+    ],
+    "SQS": [
+      "Pub/Sub"
+    ],
+    "Lambda": [
+      "Cloud Run functions",
+      "Cloud Run"
+    ],
+    "DynamoDB": [
+      "Firestore",
+      "Bigtable"
+    ]
+  },
+  "must_mention_risks": [
+    {
+      "id": "r1",
+      "text": "AWS IoT (Thing and IoT rule) has no Google Cloud equivalent (Cloud IoT Core was retired); device ingestion needs a different design such as an MQTT broker or Pub/Sub",
+      "keywords_any": [
+        "iot core",
+        "no direct",
+        "retired",
+        "mqtt",
+        "no equivalent"
+      ]
+    },
+    {
+      "id": "r2",
+      "text": "SNS subscription fan-out to three SQS queues with filtering must be re-expressed as Pub/Sub subscriptions and filters",
+      "keywords_any": [
+        "filter",
+        "fan-out",
+        "fanout"
+      ]
+    },
+    {
+      "id": "r3",
+      "text": "SQS dead-letter queues and queue policies must be rebuilt as Pub/Sub dead-letter topics and IAM bindings",
+      "keywords_any": [
+        "dead-letter",
+        "dead letter",
+        "policy",
+        "policies"
+      ]
+    },
+    {
+      "id": "r4",
+      "text": "DynamoDB table access patterns must be reviewed for Firestore or Bigtable",
+      "keywords_any": [
+        "data model",
+        "access pattern",
+        "model"
+      ]
+    }
+  ]
+}

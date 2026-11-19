@@ -1,0 +1,76 @@
+{
+  "app": "twilio-apigw",
+  "mode": "baseline",
+  "human_reviewed": true,
+  "truncated": false,
+  "tokens": 11933,
+  "retries": 0,
+  "llm_calls": 1,
+  "first_draft_violations": 11,
+  "first_draft_items": 52,
+  "invented_rate": 0.21153846153846154,
+  "violation_kinds": [
+    "aws_service",
+    "file",
+    "gcp_resource"
+  ],
+  "violations": [
+    {
+      "kind": "aws_service",
+      "item": "CloudWatch"
+    },
+    {
+      "kind": "aws_service",
+      "item": "EC2"
+    },
+    {
+      "kind": "aws_service",
+      "item": "ECS"
+    },
+    {
+      "kind": "aws_service",
+      "item": "EKS"
+    },
+    {
+      "kind": "aws_service",
+      "item": "RDS"
+    },
+    {
+      "kind": "aws_service",
+      "item": "SNS"
+    },
+    {
+      "kind": "aws_service",
+      "item": "SQS"
+    },
+    {
+      "kind": "aws_service",
+      "item": "KMS"
+    },
+    {
+      "kind": "gcp_resource",
+      "item": "Cloud Functions"
+    },
+    {
+      "kind": "gcp_resource",
+      "item": "Cloud Datastore"
+    },
+    {
+      "kind": "file",
+      "item": "requirements.txt"
+    }
+  ],
+  "service_precision": 0.8,
+  "service_recall": 1.0,
+  "service_fp": [
+    "CloudWatch"
+  ],
+  "service_fn": [],
+  "mapping_accuracy": 1.0,
+  "mapping_wrong": [],
+  "risk_coverage": 0.75,
+  "risks_missed": [
+    "r3"
+  ],
+  "wall_seconds": 12.7
+}

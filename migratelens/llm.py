@@ -44,9 +44,9 @@ class LLM:
         load_dotenv()
         self.model = model or os.environ.get("MIGRATELENS_MODEL", DEFAULT_MODEL)
         self.cache = cache or Cache(STATE_DIR / "cache.sqlite")
-        self.throttle = RpmThrottle(rpm or int(os.environ.get("MIGRATELENS_RPM", "5")))
+        self.throttle = RpmThrottle(rpm or int(os.environ.get("MIGRATELENS_RPM", "20")))
         self.budget = DailyBudget(
-            daily_limit or int(os.environ.get("MIGRATELENS_DAILY_LIMIT", "15")),
+            daily_limit or int(os.environ.get("MIGRATELENS_DAILY_LIMIT", "500")),
             STATE_DIR / "budget.json",
         )
         self.replay_only = replay_only

@@ -1,0 +1,58 @@
+{
+  "app": "sam-messaging",
+  "mode": "baseline",
+  "human_reviewed": true,
+  "truncated": false,
+  "tokens": 12624,
+  "retries": 0,
+  "llm_calls": 1,
+  "first_draft_violations": 7,
+  "first_draft_items": 49,
+  "invented_rate": 0.14285714285714285,
+  "violation_kinds": [
+    "aws_service",
+    "file",
+    "gcp_resource"
+  ],
+  "violations": [
+    {
+      "kind": "aws_service",
+      "item": "CloudWatch"
+    },
+    {
+      "kind": "aws_service",
+      "item": "RDS"
+    },
+    {
+      "kind": "aws_service",
+      "item": "ECS"
+    },
+    {
+      "kind": "aws_service",
+      "item": "S3"
+    },
+    {
+      "kind": "gcp_resource",
+      "item": "Cloud Functions"
+    },
+    {
+      "kind": "gcp_resource",
+      "item": "Eventarc"
+    },
+    {
+      "kind": "file",
+      "item": "consumer.js"
+    }
+  ],
+  "service_precision": 0.8,
+  "service_recall": 1.0,
+  "service_fp": [
+    "CloudWatch"
+  ],
+  "service_fn": [],
+  "mapping_accuracy": 1.0,
+  "mapping_wrong": [],
+  "risk_coverage": 1.0,
+  "risks_missed": [],
+  "wall_seconds": 17.3
+}

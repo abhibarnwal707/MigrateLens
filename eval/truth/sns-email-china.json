@@ -1,0 +1,117 @@
+{
+  "app": "sns-email-china",
+  "source": "https://github.com/aws-samples/sample-sns-email-notification-china-region",
+  "commit": "0a1f4c4666973978e84549ab373be6bce62232e5",
+  "license": "MIT-0",
+  "synthetic": false,
+  "human_reviewed": true,
+  "review_note": "First draft from reading the repo; not yet confirmed by the project owner. Results only count once human_reviewed is true.",
+  "services_in_scope": [
+    "SNS",
+    "SQS",
+    "Lambda",
+    "DynamoDB",
+    "Secrets Manager",
+    "KMS",
+    "CloudWatch",
+    "IAM",
+    "STS",
+    "S3"
+  ],
+  "services_out_of_scope": [
+    "EC2"
+  ],
+  "not_used_but_plausible": [
+    "SES"
+  ],
+  "expected_mapping": {
+    "SNS": [
+      "Pub/Sub"
+    ],
+    "SQS": [
+      "Pub/Sub"
+    ],
+    "Lambda": [
+      "Cloud Run functions",
+      "Cloud Run"
+    ],
+    "DynamoDB": [
+      "Firestore",
+      "Bigtable"
+    ],
+    "Secrets Manager": [
+      "Secret Manager"
+    ],
+    "KMS": [
+      "Cloud KMS"
+    ],
+    "CloudWatch": [
+      "Cloud Logging",
+      "Cloud Monitoring"
+    ],
+    "IAM": [
+      "Service Accounts",
+      "Cloud IAM"
+    ],
+    "STS": [
+      "Service Accounts"
+    ],
+    "S3": [
+      "Cloud Storage"
+    ]
+  },
+  "must_mention_risks": [
+    {
+      "id": "r1",
+      "text": "The Lambda runs in private VPC subnets with VPC endpoints and security groups; private networking must be redesigned (serverless VPC egress, firewall rules)",
+      "keywords_any": [
+        "vpc",
+        "network"
+      ]
+    },
+    {
+      "id": "r2",
+      "text": "KMS customer-managed key encrypts queues, tables and secrets; data must be re-encrypted under Cloud KMS keys, ciphertext is not portable",
+      "keywords_any": [
+        "cmek",
+        "re-encrypt",
+        "kms"
+      ]
+    },
+    {
+      "id": "r3",
+      "text": "SNS-to-SQS fan-in from member accounts across aws and aws-cn partitions; cross-account and cross-partition access must be redesigned around projects and IAM",
+      "keywords_any": [
+        "cross-account",
+        "partition",
+        "account"
+      ]
+    },
+    {
+      "id": "r4",
+      "text": "SQS dead-letter queues, redrive and CloudWatch alarms must be rebuilt with Pub/Sub dead-letter topics and Cloud Monitoring alerts",
+      "keywords_any": [
+        "dead-letter",
+        "dead letter",
+        "alarm",
+        "alert"
+      ]
+    },
+    {
+      "id": "r5",
+      "text": "SMTP credentials live in Secrets Manager and must be migrated out-of-band to Secret Manager",
+      "keywords_any": [
+        "secret"
+      ]
+    },
+    {
+      "id": "r6",
+      "text": "DynamoDB recipient-configuration tables need a data-model and access-pattern review for Firestore",
+      "keywords_any": [
+        "data model",
+        "access pattern",
+        "index"
+      ]
+    }
+  ]
+}

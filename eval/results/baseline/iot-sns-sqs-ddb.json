@@ -1,0 +1,51 @@
+{
+  "app": "iot-sns-sqs-ddb",
+  "mode": "baseline",
+  "human_reviewed": true,
+  "truncated": false,
+  "tokens": 9485,
+  "retries": 0,
+  "llm_calls": 1,
+  "first_draft_violations": 5,
+  "first_draft_items": 37,
+  "invented_rate": 0.13513513513513514,
+  "violation_kinds": [
+    "file",
+    "gcp_resource"
+  ],
+  "violations": [
+    {
+      "kind": "gcp_resource",
+      "item": "GKE"
+    },
+    {
+      "kind": "gcp_resource",
+      "item": "Cloud Functions"
+    },
+    {
+      "kind": "gcp_resource",
+      "item": "Cloud Tasks"
+    },
+    {
+      "kind": "gcp_resource",
+      "item": "Cloud Datastore"
+    },
+    {
+      "kind": "file",
+      "item": "index.js"
+    }
+  ],
+  "service_precision": 1.0,
+  "service_recall": 1.0,
+  "service_fp": [],
+  "service_fn": [],
+  "mapping_accuracy": 0.75,
+  "mapping_wrong": [
+    "Lambda"
+  ],
+  "risk_coverage": 0.75,
+  "risks_missed": [
+    "r4"
+  ],
+  "wall_seconds": 17.29
+}

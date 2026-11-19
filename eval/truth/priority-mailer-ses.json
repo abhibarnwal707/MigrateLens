@@ -1,0 +1,86 @@
+{
+  "app": "priority-mailer-ses",
+  "source": "https://github.com/aws-samples/sample-priority-mailer-cdk-solution-using-amazon-ses",
+  "commit": "da57aee4ea94f25f85d97b1199a19b459cc6682f",
+  "license": "MIT-0",
+  "synthetic": false,
+  "human_reviewed": true,
+  "review_note": "First draft from reading the repo; not yet confirmed by the project owner. Results only count once human_reviewed is true.",
+  "services_in_scope": [
+    "S3",
+    "SQS",
+    "SES",
+    "Lambda",
+    "CloudWatch",
+    "IAM"
+  ],
+  "services_out_of_scope": [],
+  "not_used_but_plausible": [
+    "SNS",
+    "DynamoDB"
+  ],
+  "expected_mapping": {
+    "S3": [
+      "Cloud Storage"
+    ],
+    "SQS": [
+      "Pub/Sub"
+    ],
+    "SES": [],
+    "Lambda": [
+      "Cloud Run functions",
+      "Cloud Run"
+    ],
+    "CloudWatch": [
+      "Cloud Logging",
+      "Cloud Monitoring"
+    ],
+    "IAM": [
+      "Service Accounts",
+      "Cloud IAM"
+    ]
+  },
+  "must_mention_risks": [
+    {
+      "id": "r1",
+      "text": "SES has no first-party Google Cloud equivalent; a third-party email provider or SMTP relay is needed",
+      "keywords_any": [
+        "no direct",
+        "no first-party",
+        "third-party",
+        "third party",
+        "smtp relay"
+      ]
+    },
+    {
+      "id": "r2",
+      "text": "The priority-queue pattern uses separate SQS queues with dead-letter queues; Pub/Sub has no native priority, so use separate topics and subscriptions",
+      "keywords_any": [
+        "priority"
+      ]
+    },
+    {
+      "id": "r3",
+      "text": "S3 event notifications to Lambda must be rebuilt as Cloud Storage notifications to Pub/Sub or a Cloud Run trigger",
+      "keywords_any": [
+        "notification"
+      ]
+    },
+    {
+      "id": "r4",
+      "text": "Infrastructure is written with AWS CDK (Python) and cannot be reused; it must be rewritten (for example in Terraform)",
+      "keywords_any": [
+        "cdk"
+      ]
+    },
+    {
+      "id": "r5",
+      "text": "SES sender verification and deliverability reputation must be rebuilt with the new provider",
+      "keywords_any": [
+        "verification",
+        "deliverability",
+        "reputation"
+      ]
+    }
+  ]
+}

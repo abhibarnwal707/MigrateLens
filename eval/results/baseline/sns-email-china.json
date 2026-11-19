@@ -1,0 +1,65 @@
+{
+  "app": "sns-email-china",
+  "mode": "baseline",
+  "human_reviewed": true,
+  "truncated": false,
+  "tokens": 88654,
+  "retries": 0,
+  "llm_calls": 1,
+  "first_draft_violations": 7,
+  "first_draft_items": 59,
+  "invented_rate": 0.11864406779661017,
+  "violation_kinds": [
+    "aws_service",
+    "file",
+    "gcp_resource"
+  ],
+  "violations": [
+    {
+      "kind": "aws_service",
+      "item": "VPC"
+    },
+    {
+      "kind": "aws_service",
+      "item": "EC2"
+    },
+    {
+      "kind": "aws_service",
+      "item": "SES"
+    },
+    {
+      "kind": "gcp_resource",
+      "item": "Cloud Functions"
+    },
+    {
+      "kind": "gcp_resource",
+      "item": "Cloud Datastore"
+    },
+    {
+      "kind": "gcp_resource",
+      "item": "Compute Engine"
+    },
+    {
+      "kind": "file",
+      "item": "mailcfg.py"
+    }
+  ],
+  "service_precision": 0.8,
+  "service_recall": 0.8888888888888888,
+  "service_fp": [
+    "SES",
+    "VPC"
+  ],
+  "service_fn": [
+    "STS"
+  ],
+  "mapping_accuracy": 0.8888888888888888,
+  "mapping_wrong": [
+    "STS"
+  ],
+  "risk_coverage": 0.8333333333333334,
+  "risks_missed": [
+    "r6"
+  ],
+  "wall_seconds": 16.52
+}

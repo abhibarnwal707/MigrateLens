@@ -1,0 +1,73 @@
+{
+  "app": "twilio-apigw",
+  "source": "https://github.com/aws-samples/lambda-apigateway-twilio-tutorial",
+  "commit": "d2c990dbe5ca870e50243ae50e208dfd1889ddef",
+  "license": "Apache-2.0",
+  "synthetic": false,
+  "human_reviewed": true,
+  "review_note": "First draft from reading the repo; not yet confirmed by the project owner. Results only count once human_reviewed is true.",
+  "services_in_scope": [
+    "Lambda",
+    "API Gateway",
+    "S3",
+    "DynamoDB"
+  ],
+  "services_out_of_scope": [],
+  "not_used_but_plausible": [
+    "SQS",
+    "SNS"
+  ],
+  "expected_mapping": {
+    "Lambda": [
+      "Cloud Run functions",
+      "Cloud Run"
+    ],
+    "API Gateway": [
+      "API Gateway"
+    ],
+    "S3": [
+      "Cloud Storage"
+    ],
+    "DynamoDB": [
+      "Firestore",
+      "Bigtable"
+    ]
+  },
+  "must_mention_risks": [
+    {
+      "id": "r1",
+      "text": "The code uploads with ACL='public-read'; Cloud Storage uses uniform bucket-level access, so per-object ACLs must be replaced by IAM or signed URLs",
+      "keywords_any": [
+        "acl",
+        "public"
+      ]
+    },
+    {
+      "id": "r2",
+      "text": "The API is defined by swagger.yaml for API Gateway and must be re-expressed as an API Gateway (OpenAPI) config or Cloud Run ingress",
+      "keywords_any": [
+        "swagger",
+        "openapi",
+        "api config"
+      ]
+    },
+    {
+      "id": "r3",
+      "text": "DynamoDB single-key access (fromNumber) must be re-modelled for Firestore or Bigtable",
+      "keywords_any": [
+        "data model",
+        "access pattern",
+        "re-model",
+        "model"
+      ]
+    },
+    {
+      "id": "r4",
+      "text": "boto3 and the Twilio client code must be ported to Google Cloud client libraries; Twilio keys must move to Secret Manager",
+      "keywords_any": [
+        "client librar",
+        "secret"
+      ]
+    }
+  ]
+}

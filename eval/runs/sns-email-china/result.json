@@ -1,0 +1,38 @@
+{
+  "verdict": "could_not_verify",
+  "stop_reason": "guardrail_failed",
+  "plan": null,
+  "retries": 2,
+  "first_draft_violations": 1,
+  "first_draft_items": 83,
+  "rejections": [
+    [
+      {
+        "kind": "aws_service",
+        "item": "EC2",
+        "detail": "named in the plan but not found in the repo"
+      }
+    ],
+    [
+      {
+        "kind": "aws_service",
+        "item": "EC2",
+        "detail": "named in the plan but not found in the repo"
+      }
+    ],
+    [
+      {
+        "kind": "aws_service",
+        "item": "EC2",
+        "detail": "named in the plan but not found in the repo"
+      }
+    ]
+  ],
+  "llm_calls": 17,
+  "api_calls": 0,
+  "cache_hits": 17,
+  "tokens": 142322,
+  "wall_seconds": 0.32,
+  "terraform": null,
+  "artifacts": {}
+}

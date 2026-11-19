@@ -1,0 +1,60 @@
+{
+  "app": "java-synthetic-orders",
+  "source": "synthetic (hand-written fixture in this repo)",
+  "commit": null,
+  "license": "n/a (written for this project)",
+  "synthetic": true,
+  "human_reviewed": true,
+  "review_note": "First draft from reading the repo; not yet confirmed by the project owner. Results only count once human_reviewed is true.",
+  "services_in_scope": [
+    "S3",
+    "DynamoDB",
+    "SQS"
+  ],
+  "services_out_of_scope": [],
+  "not_used_but_plausible": [
+    "SNS",
+    "Lambda"
+  ],
+  "expected_mapping": {
+    "S3": [
+      "Cloud Storage"
+    ],
+    "DynamoDB": [
+      "Firestore",
+      "Bigtable"
+    ],
+    "SQS": [
+      "Pub/Sub"
+    ]
+  },
+  "must_mention_risks": [
+    {
+      "id": "r1",
+      "text": "The AWS SDK for Java v2 clients must be replaced with Google Cloud client libraries",
+      "keywords_any": [
+        "sdk",
+        "client librar"
+      ]
+    },
+    {
+      "id": "r2",
+      "text": "DynamoDB putItem usage needs a data-model review for Firestore or Bigtable",
+      "keywords_any": [
+        "data model",
+        "access pattern",
+        "model"
+      ]
+    },
+    {
+      "id": "r3",
+      "text": "SQS semantics (visibility timeout, ordering) differ from Pub/Sub; consumers must be idempotent",
+      "keywords_any": [
+        "visibility",
+        "ordering",
+        "idempotent",
+        "ack deadline"
+      ]
+    }
+  ]
+}

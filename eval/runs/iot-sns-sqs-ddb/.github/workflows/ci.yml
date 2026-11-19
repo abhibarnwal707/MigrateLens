@@ -1,0 +1,20 @@
+name: ci
+on:
+  push:
+  pull_request:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt ruff pytest
+      - run: ruff check .
+      - run: pytest
+      - name: Build image
+        run: docker build -t iot-sns-sqs-ddb:${{ github.sha }} .
+      # Deployment is intentionally NOT included. To deploy later, add authentication via
+      # Workload Identity Federation and a `gcloud run deploy` step. Generated Terraform
+      # has been validated, never applied.

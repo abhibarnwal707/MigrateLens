@@ -127,10 +127,10 @@ class TurnResult:
 @dataclass
 class SessionConfig:
     model: str = DEFAULT_MODEL
-    rpm: int = 5
-    daily_limit: int = 15
+    rpm: int = 20
+    daily_limit: int = 500
     use_mcp: bool = True
-    max_llm_calls_per_turn: int = 10
+    max_llm_calls_per_turn: int = 25
     max_tokens: int = 150_000
     max_seconds: float = 240.0
     replay_only: bool = False

@@ -1,0 +1,28 @@
+{
+  "app": "priority-mailer-ses",
+  "mode": "agent",
+  "human_reviewed": true,
+  "verdict": "verified",
+  "stop_reason": "completed",
+  "retries": 0,
+  "first_draft_violations": 0,
+  "first_draft_items": 34,
+  "invented_rate": 0.0,
+  "rejections": [],
+  "llm_calls": 5,
+  "tokens": 23423,
+  "terraform_ok": true,
+  "service_precision": 1.0,
+  "service_recall": 1.0,
+  "service_fp": [],
+  "service_fn": [],
+  "mapping_accuracy": 1.0,
+  "mapping_wrong": [],
+  "risk_coverage": 0.8,
+  "risks_missed": [
+    "r4"
+  ],
+  "wall_seconds": 34.48,
+  "api_calls_in_recorded_run": 4,
+  "replay_api_calls": 0
+}

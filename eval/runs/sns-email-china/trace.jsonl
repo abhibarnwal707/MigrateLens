@@ -1,0 +1,7 @@
+{"event": "turn", "attempt": 0, "stop_reason": "completed", "error": null}
+{"event": "guardrail", "attempt": 0, "ok": false, "violations": [{"kind": "aws_service", "item": "EC2", "detail": "named in the plan but not found in the repo"}]}
+{"event": "turn", "attempt": 1, "stop_reason": "completed", "error": null}
+{"event": "guardrail", "attempt": 1, "ok": false, "violations": [{"kind": "aws_service", "item": "EC2", "detail": "named in the plan but not found in the repo"}]}
+{"event": "turn", "attempt": 2, "stop_reason": "completed", "error": null}
+{"event": "guardrail", "attempt": 2, "ok": false, "violations": [{"kind": "aws_service", "item": "EC2", "detail": "named in the plan but not found in the repo"}]}
+{"event": "finish", "verdict": "could_not_verify", "stop_reason": "guardrail_failed", "retries": 2, "first_draft_violations": 1, "first_draft_items": 83, "rejections": [[{"kind": "aws_service", "item": "EC2", "detail": "named in the plan but not found in the repo"}], [{"kind": "aws_service", "item": "EC2", "detail": "named in the plan but not found in the repo"}], [{"kind": "aws_service", "item": "EC2", "detail": "named in the plan but not found in the repo"}]], "llm_calls": 17, "api_calls": 0, "cache_hits": 17, "tokens": 142322, "wall_seconds": 0.32, "terraform": null, "artifacts": {}}

@@ -1,0 +1,75 @@
+{
+  "app": "sns-email-china",
+  "mode": "agent",
+  "human_reviewed": true,
+  "verdict": "could_not_verify",
+  "stop_reason": "guardrail_failed",
+  "retries": 2,
+  "first_draft_violations": 1,
+  "first_draft_items": 83,
+  "invented_rate": 0.012048192771084338,
+  "rejections": [
+    [
+      {
+        "kind": "aws_service",
+        "item": "EC2",
+        "detail": "named in the plan but not found in the repo"
+      }
+    ],
+    [
+      {
+        "kind": "aws_service",
+        "item": "EC2",
+        "detail": "named in the plan but not found in the repo"
+      }
+    ],
+    [
+      {
+        "kind": "aws_service",
+        "item": "EC2",
+        "detail": "named in the plan but not found in the repo"
+      }
+    ]
+  ],
+  "llm_calls": 17,
+  "tokens": 142322,
+  "terraform_ok": null,
+  "service_precision": 0.0,
+  "service_recall": 0.0,
+  "service_fp": [],
+  "service_fn": [
+    "CloudWatch",
+    "DynamoDB",
+    "KMS",
+    "Lambda",
+    "S3",
+    "SNS",
+    "SQS",
+    "STS",
+    "Secrets Manager"
+  ],
+  "mapping_accuracy": 0.0,
+  "mapping_wrong": [
+    "SNS",
+    "SQS",
+    "Lambda",
+    "DynamoDB",
+    "Secrets Manager",
+    "KMS",
+    "CloudWatch",
+    "STS",
+    "S3"
+  ],
+  "risk_coverage": 0.0,
+  "risks_missed": [
+    "r1",
+    "r2",
+    "r3",
+    "r4",
+    "r5",
+    "r6"
+  ],
+  "wall_seconds": 125.59,
+  "api_calls_in_recorded_run": 6,
+  "replay_api_calls": 0
+}

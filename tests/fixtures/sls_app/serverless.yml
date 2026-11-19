@@ -1,0 +1,13 @@
+service: demo
+provider:
+  name: aws
+  runtime: python3.12
+functions:
+  worker:
+    handler: handler.run
+    events:
+      - sqs: arn:aws:sqs:us-east-1:123456789012:jobs
+resources:
+  Resources:
+    Bucket:
+      Type: AWS::S3::Bucket

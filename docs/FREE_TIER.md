@@ -18,6 +18,10 @@ Probed with the project's real AI Studio key on 2026-11-19 (`generate_content`, 
 
 The code retries on 429, 500 and 503 with exponential backoff.
 
+## Pricing page (confirmed from a screenshot of ai.google.dev/pricing, 2026-11-19)
+
+For `gemini-3.5-flash-lite` on the Standard tab: input and output tokens are "Free of charge" on the free tier; context caching and Google Search/Maps grounding are not available on the free tier; "Used to improve our products": **Yes**. The screenshot did not show request limits.
+
 ## Rate limits: NOT yet confirmed from an official source
 
 Third-party articles disagree, and some report free-tier Flash as low as 5 requests per minute and 20 per day, while older guides say 10-15 RPM and 1,500 RPD. Limits are per project and change often.

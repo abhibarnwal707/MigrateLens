@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MigrateLens — rewire AWS apps for Google Cloud</title>
+<meta name="description" content="An AI agent on Google ADK and Gemini that wires every AWS service it can prove to its Google Cloud equivalent, with file:line evidence, and refuses what it cannot prove.">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=panchang@700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#board">Skip to the board</a>
+
+<header class="nav">
+  <a class="wordmark" href="#top">MIGRATELENS</a>
+  <nav aria-label="Sections">
+    <a href="#board">Board</a>
+    <a href="#gate">Gate</a>
+    <a href="#results">Results</a>
+    <a href="#wiring">Wiring</a>
+  </nav>
+  <a class="btn" href="https://github.com/abhibarnwal707/MigrateLens">Source</a>
+</header>
+
+<main id="top">
+  <!-- HERO: shouted headline, the live board rising beneath it -->
+  <section class="hero" aria-labelledby="hero-title">
+    <h1 id="hero-title" class="hero-title">
+      <span class="line"><span>Rewire</span></span>
+      <span class="line"><span>the cloud</span></span>
+    </h1>
+    <figure class="hero-board" data-ui>
+      <svg class="board" id="hero-board" viewBox="0 0 400 520" role="img" aria-label="Circuit board of a sample app's AWS services wired to Google Cloud"></svg>
+    </figure>
+    <p class="hero-lead">An AI agent on Google ADK and Gemini that reads an AWS repo, wires every service it can prove to Google Cloud, and writes the Terraform.</p>
+    <p class="hero-fact"><span data-r="invented_agent"></span>% invented resources, against <span data-r="invented_baseline"></span>% without its tools, across <span data-r="n_apps"></span> apps.</p>
+  </section>
+
+  <!-- INTRO: the borrowed world, real footage and a real picture -->
+  <section class="intro" aria-labelledby="intro-title">
+    <div class="intro-text reveal">
+      <h2 id="intro-title" class="h-head">Moved by hand</h2>
+      <p class="lead">In 1947 Arnhem’s operators still patched every call by hand, until the exchange went automatic. Cloud migrations are mostly still patched by hand. MigrateLens moves only the wires it can trace to a line of code.</p>
+    </div>
+    <figure class="intro-tall reveal">
+      <img src="img/patch-panel.jpg" width="1205" height="1600" alt="A server rack with dozens of tangled grey patch cables" loading="lazy">
+      <figcaption>A patch panel today.</figcaption>
+    </figure>
+    <figure class="intro-wide reveal">
+      <video id="reel" muted loop playsinline preload="none" poster="media/arnhem-1947-poster.jpg" width="768" height="576" aria-label="1947 newsreel: telephone operators in Arnhem patching calls by hand at a manual switchboard"></video>
+      <figcaption>Operators at the Arnhem exchange, Polygoon newsreel, 1947.</figcaption>
+    </figure>
+  </section>
+
+  <!-- BOARD: big names, fixed preview. The live thing. -->
+  <section class="work" id="board" aria-labelledby="board-title">
+    <div class="work-list">
+      <h2 id="board-title" class="h-head reveal">Seven real apps</h2>
+      <p class="work-note reveal">Pick one. The board rewires from its recorded run. Hover a pin for its evidence.</p>
+      <ul class="names" id="names"></ul>
+    </div>
+    <div class="work-frame">
+      <figure class="frame" data-ui>
+        <svg class="board" id="main-board" viewBox="0 0 400 520" role="img" aria-label="Circuit board for the selected app"></svg>
+      </figure>
+      <p class="readout" id="readout" aria-live="polite"></p>
+    </div>
+    <noscript><p class="lead">The board needs JavaScript. The full wiring table below works without it.</p></noscript>
+  </section>
+
+  <!-- GATE: one card, four fields -->
+  <section class="gate" id="gate" aria-labelledby="gate-title">
+    <div class="field f1">
+      <h2 id="gate-title" class="gate-title">The gate</h2>
+      <div class="card" data-ui id="card1"></div>
+      <p class="clause">First the repo lands, read-only.</p>
+    </div>
+    <div class="field f2">
+      <div class="card" data-ui id="card2"></div>
+      <p class="clause">Then every service needs a line of code.</p>
+    </div>
+    <div class="field f3">
+      <div class="card" data-ui id="card3"></div>
+      <p class="clause">Then the guardrail checks each name.</p>
+    </div>
+    <div class="field f4">
+      <div class="card" data-ui id="card4"></div>
+      <p class="clause">Then it ships the plan, or refuses.</p>
+    </div>
+  </section>
+
+  <!-- RESULTS: one figure owns the screen -->
+  <section class="stats" id="results" aria-labelledby="results-title">
+    <div class="stats-text">
+      <h2 id="results-title" class="h-claim reveal">Invented resources</h2>
+      <p class="figure reveal"><span data-r="invented_agent"></span><sup>%</sup></p>
+      <p class="caption reveal">In first drafts, across <span data-r="n_apps"></span> apps (<span data-r="n_real"></span> public AWS samples, <span data-r="n_synth"></span> synthetic). The same Gemini model with the repo pasted in and no tools: <span data-r="invented_baseline"></span>%. That baseline still found more services: recall <span data-r="recall_baseline"></span>% against <span data-r="recall_agent"></span>%.</p>
+    </div>
+    <figure class="stats-pic reveal">
+      <img src="img/network-analyser-1950.jpg" width="1600" height="1067" alt="A 1950 Westinghouse network analyser panel with eight analogue meters and dials" loading="lazy">
+      <figcaption>Network analyser, Westinghouse, 1950.</figcaption>
+    </figure>
+    <p class="source">From eval/results, human-reviewed ground truth, 19 Nov 2026. <span data-r="verified"></span> of <span data-r="n_apps"></span> plans verified; Terraform validated on <span data-r="tf_ok"></span> of <span data-r="tf_n"></span>, never deployed.</p>
+  </section>
+
+  <!-- WIRING: the mapping table as a line-up -->
+  <section class="lineup" id="wiring" aria-labelledby="wiring-title">
+    <figure class="lineup-pic reveal">
+      <img src="img/circuit-board.jpg" width="1600" height="1067" alt="Close-up of a circuit board with a green capacitor, a yellow capacitor and a transistor" loading="lazy">
+    </figure>
+    <h2 id="wiring-title" class="lineup-title">The wiring table</h2>
+    <div class="table" id="table" role="table" aria-label="AWS to Google Cloud mapping"></div>
+  </section>
+
+  <!-- CTA: one word is the button -->
+  <a class="cta" href="https://github.com/abhibarnwal707/MigrateLens">
+    <span class="cta-note">Free to run: clone it, add a free Gemini key, then make demo.</span>
+    <svg class="cta-arrow" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 36 36 12M16 12h20v20" fill="none" stroke="currentColor" stroke-width="5"/></svg>
+    <span class="cta-word">Clone</span>
+  </a>
+</main>
+
+<footer class="footer">
+  <div class="foot-top">
+    <p>MigrateLens, built by Abhishek Kumar.</p>
+    <p>Generated Terraform is validated, never deployed. Gemini free tier only.</p>
+    <a href="#top">Back to top</a>
+  </div>
+  <a class="contact" href="https://github.com/abhibarnwal707">github.com/<br>abhibarnwal707</a>
+  <div class="foot-meta">
+    <p><a href="https://github.com/abhibarnwal707/MigrateLens">Repository</a> · <a href="https://github.com/abhibarnwal707/MigrateLens/blob/main/docs/RESULTS_SUMMARY.md">Results</a></p>
+    <p class="credits">Footage: <a href="https://commons.wikimedia.org/wiki/File:ARNHEM_KAN_WEER_AUTOMATISCH_TELEFONEREN-PGM4011942.webm">“Arnhem kan weer automatisch telefoneren”</a>, Polygoon Hollands Nieuws, 1947, Beeld en Geluid, public domain. Pictures: <a href="https://wordpress.org/photos/photo/64767dd6fa/">“A messy network server room”</a>, Moses Cursor Ssebunya, CC0; <a href="https://collections.museumsvictoria.com.au/items/1763754">“Network Analyser, Westinghouse, 1950”</a>, Matilda Vaughan / Museums Victoria, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>; <a href="https://commons.wikimedia.org/wiki/File:Macro_circuit_board.JPG">“Macro circuit board”</a>, Ingo Dierking, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>.</p>
+    <p>2026</p>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

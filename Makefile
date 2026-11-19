@@ -1,4 +1,4 @@
-.PHONY: test lint eval baseline report demo
+.PHONY: test lint eval baseline report demo site site-serve
 
 test:
 	uv run pytest -q
@@ -17,3 +17,9 @@ report:
 
 demo:
 	uv run streamlit run app/streamlit_app.py
+
+site:  ## rebuild site/data.json and site/data.js from the eval results
+	uv run python site/build_data.py
+
+site-serve:
+	uv run python -m http.server 8000 -d site

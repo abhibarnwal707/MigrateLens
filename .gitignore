@@ -13,3 +13,6 @@ __pycache__/
 
 # Streamlit local secrets
 .streamlit/secrets.toml
+
+# design tooling working files (screenshots, direction sheet)
+.taste-skill/

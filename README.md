@@ -12,7 +12,10 @@ Point it at a small application repository that runs on AWS and it will:
 5. **refuse to state anything it cannot back with evidence** from the repo (a guardrail enforced in code),
 6. and be **scored by an evaluation harness** against hand-written ground truth, next to a no-agent baseline.
 
-**Live demo:** _add the Streamlit Community Cloud URL here after deploying (see [Deploy the demo](#deploy-the-demo-free))._
+**Website:** _add the GitHub Pages URL here after the first deploy (see [Publish the website](#publish-the-website-free))._
+An animated circuit-board view of the real evaluation runs, built from `site/` with no build step.
+
+**Live analysis demo:** _add the Streamlit Community Cloud URL here after deploying (see [Deploy the demo](#deploy-the-demo-free))._
 
 > **Generated Terraform is validated, not deployed.** The Terraform targets Cloud Run and friends and is
 > checked with `terraform init -backend=false && terraform validate` only. Nothing in this project creates,
@@ -100,6 +103,17 @@ Bundled samples replay recorded runs and use no quota. Live analysis of a pasted
 (2 runs per visitor session, 15 per day for the whole app). The hosted app has no Terraform binary, so live
 runs show `terraform validate: not run`.
 
+## Publish the website (free)
+
+`site/` is a static page (HTML, CSS, JS, no build step) whose every number comes from `site/data.json`,
+generated from the eval results by `make site` (a test fails if it is stale). Preview it with `make site-serve`.
+
+1. In the GitHub repo: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+2. Push to `main`. The `site` workflow (`.github/workflows/pages.yml`) publishes `site/` to
+   `https://<user>.github.io/MigrateLens/`. Public repos use GitHub Pages and Actions for free.
+
+Pictures and the 1947 newsreel are from open collections; their credits are in the site footer.
+
 ## Honest limitations
 
 - **Small sample.** 7 apps (6 real, 1 synthetic Java). Confidence intervals are wide and most gaps could be noise.
@@ -127,7 +141,8 @@ for what is reusable as-is and what is still migration-specific.
 ```
 migratelens/   agent.py, pipeline.py, guardrail.py, cache.py, throttle.py, mcp_server.py, tools/, data/mapping.yaml
 eval/          apps/ (pinned samples), truth/ (reviewed ground truth), metrics, baseline, run_eval, report, cache.sqlite
-app/           streamlit_app.py
+app/           streamlit_app.py (live analysis of a public repo)
+site/          the website: index.html, style.css, main.js, data.json (generated), img/, media/
 docs/          ARCHITECTURE.md, FREE_TIER.md, RESULTS_SUMMARY.md, RESUME_NUMBERS.md
 tests/         unit tests (no API calls) and headless Streamlit tests
 ```

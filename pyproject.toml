@@ -33,3 +33,4 @@ packages = ["migratelens"]
 
 [tool.ruff.lint.per-file-ignores]
 "eval/report.py" = ["E501"]  # long markdown string literals
+"site/build_data.py" = ["E501"]  # long dict literals

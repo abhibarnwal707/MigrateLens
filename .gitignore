@@ -10,3 +10,6 @@ __pycache__/
 
 # Local runtime state (cache DB, budget counter, traces)
 .migratelens/
+
+# Streamlit local secrets
+.streamlit/secrets.toml

@@ -16,4 +16,4 @@ report:
 	uv run python -m eval.report
 
 demo:
-	@echo "demo arrives in Step 6"
+	uv run streamlit run app/streamlit_app.py

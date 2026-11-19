@@ -1,0 +1,144 @@
+# Curated AWS -> Google Cloud mapping. Single source of truth: the mapper, generators and
+# guardrail read only this file. `gcp` names are the ONLY GCP products the agent may cite.
+# Checked against https://cloud.google.com/docs/get-started/aws-azure-gcp-service-comparison
+# (2026-11-19). `direct: false` means there is no one-to-one equivalent.
+version: 1
+services:
+  S3:
+    gcp: [Cloud Storage]
+    direct: true
+    tradeoff: Near drop-in object store; storage classes and lifecycle rules map, but the API and IAM model differ.
+    risk: Code using the S3 API needs the Cloud Storage client or the XML interoperability API; presigned URLs become signed URLs; bucket policies must be rewritten as IAM.
+    docs: https://cloud.google.com/storage/docs
+  SQS:
+    gcp: [Pub/Sub]
+    direct: true
+    tradeoff: Pub/Sub topic plus pull subscription replaces a queue; scales automatically but is a pub/sub model, not a queue.
+    risk: FIFO ordering, visibility timeout and delay semantics differ (ordering keys, ack deadlines); consumers must be idempotent.
+    docs: https://cloud.google.com/pubsub/docs
+  SNS:
+    gcp: [Pub/Sub]
+    direct: true
+    tradeoff: A Pub/Sub topic with subscriptions replaces an SNS topic; push subscriptions cover HTTP fan-out.
+    risk: SMS, mobile push and email delivery protocols have no Pub/Sub equivalent; message filtering syntax differs.
+    docs: https://cloud.google.com/pubsub/docs
+  DynamoDB:
+    gcp: [Firestore, Bigtable]
+    direct: false
+    tradeoff: Firestore suits document and key-value access with simple queries; Bigtable suits very high throughput wide-column workloads but needs more design.
+    risk: Data model, secondary indexes, transactions and capacity model differ; access patterns must be re-validated before choosing the target.
+    docs: https://cloud.google.com/firestore/docs
+  Lambda:
+    gcp: [Cloud Run functions, Cloud Run]
+    direct: true
+    tradeoff: Cloud Run functions keep the function model; Cloud Run suits containerised handlers and longer requests.
+    risk: Event source wiring (triggers), handler signatures, runtime versions and timeout/concurrency limits differ.
+    docs: https://cloud.google.com/run/docs
+  ECS:
+    gcp: [Cloud Run]
+    direct: true
+    tradeoff: Cloud Run runs stateless containers with no cluster to manage; fits Fargate-style workloads.
+    risk: Stateful, daemon or multi-container task definitions and host-level features need rework (sidecars are supported, volumes are limited).
+    docs: https://cloud.google.com/run/docs
+  "Secrets Manager":
+    gcp: [Secret Manager]
+    direct: true
+    tradeoff: Close match; secrets are versioned and IAM-controlled.
+    risk: Automatic rotation is wired differently (Pub/Sub rotation notifications plus your own function); secret values must be migrated out-of-band, never through the repo.
+    docs: https://cloud.google.com/secret-manager/docs
+  "SSM Parameter Store":
+    gcp: [Secret Manager]
+    direct: false
+    tradeoff: Secret Manager covers sensitive parameters; plain configuration is better kept in environment variables.
+    risk: Hierarchical path names and parameter types do not carry over; naming scheme must be redesigned.
+    docs: https://cloud.google.com/secret-manager/docs
+  CloudWatch:
+    gcp: [Cloud Logging, Cloud Monitoring]
+    direct: true
+    tradeoff: Logs go to Cloud Logging and metrics/alerts to Cloud Monitoring; Cloud Run ships stdout logs automatically.
+    risk: CloudWatch Logs Insights queries, metric filters and dashboards must be rebuilt; custom metric names differ.
+    docs: https://cloud.google.com/logging/docs
+  IAM:
+    gcp: [Service Accounts, Cloud IAM]
+    direct: false
+    tradeoff: IAM roles become service accounts with narrowly scoped predefined roles bound to specific resources.
+    risk: Policy languages differ; over-broad grants are the main risk, so bind roles per resource and avoid project-wide editor/owner.
+    docs: https://cloud.google.com/iam/docs/service-account-overview
+  RDS:
+    gcp: [Cloud SQL]
+    direct: true
+    tradeoff: Managed MySQL, PostgreSQL and SQL Server; Aurora-specific features have no direct match (AlloyDB is an option).
+    risk: Engine version, extensions and parameter groups must be checked; data migration needs Database Migration Service or dump/restore with downtime planning.
+    docs: https://cloud.google.com/sql/docs
+  ECR:
+    gcp: [Artifact Registry]
+    direct: true
+    tradeoff: Container images move to an Artifact Registry Docker repository.
+    risk: Image references and CI push steps must be updated; vulnerability scanning settings differ.
+    docs: https://cloud.google.com/artifact-registry/docs
+  KMS:
+    gcp: [Cloud KMS]
+    direct: true
+    tradeoff: Key rings and keys; similar envelope-encryption pattern.
+    risk: Existing ciphertext cannot be moved between providers without re-encryption.
+    docs: https://cloud.google.com/kms/docs
+  "API Gateway":
+    gcp: [API Gateway]
+    direct: true
+    tradeoff: Managed API front door for Cloud Run and other backends using OpenAPI configs.
+    risk: Authorizers, usage plans and stage variables map unevenly; the API config must be re-expressed.
+    docs: https://cloud.google.com/api-gateway/docs
+  EventBridge:
+    gcp: [Cloud Scheduler, Pub/Sub]
+    direct: false
+    tradeoff: Cloud Scheduler covers cron-style rules; event buses and pattern routing are approximated with Pub/Sub topics.
+    risk: Event pattern matching and schema registry have no direct equivalent.
+    docs: https://cloud.google.com/scheduler/docs
+  "Step Functions":
+    gcp: [Workflows]
+    direct: true
+    tradeoff: Workflows orchestrates serverless steps with YAML definitions.
+    risk: Amazon States Language definitions must be rewritten; error handling and retry semantics differ.
+    docs: https://cloud.google.com/workflows/docs
+  Kinesis:
+    gcp: [Pub/Sub]
+    direct: false
+    tradeoff: Pub/Sub handles streaming ingestion; Dataflow can add stream processing.
+    risk: Shard-based ordering and replay semantics differ; consumers need redesign.
+    docs: https://cloud.google.com/pubsub/docs
+  ElastiCache:
+    gcp: [Memorystore]
+    direct: true
+    tradeoff: Managed Redis-compatible (Valkey/Redis) cache.
+    risk: Engine version and cluster-mode settings must match; Memcached support differs.
+    docs: https://cloud.google.com/memorystore/docs
+  CloudFront:
+    gcp: [Cloud CDN]
+    direct: true
+    tradeoff: CDN in front of a load balancer or Cloud Storage backend.
+    risk: Edge functions and cache behaviours are configured differently.
+    docs: https://cloud.google.com/cdn/docs
+  "Route 53":
+    gcp: [Cloud DNS]
+    direct: true
+    tradeoff: Managed authoritative DNS.
+    risk: Routing policies (weighted, latency) and health checks do not map one-to-one; plan a low-TTL cutover.
+    docs: https://cloud.google.com/dns/docs
+  Cognito:
+    gcp: [Identity Platform]
+    direct: false
+    tradeoff: Identity Platform provides managed sign-in and user pools.
+    risk: User migration including password hashes is non-trivial; token formats and triggers differ.
+    docs: https://cloud.google.com/identity-platform/docs
+  STS:
+    gcp: [Service Accounts]
+    direct: false
+    tradeoff: Short-lived credentials come from service account impersonation and workload identity.
+    risk: Cross-account assume-role patterns need redesign around service account impersonation.
+    docs: https://cloud.google.com/iam/docs/service-account-impersonation
+  SES:
+    gcp: []
+    direct: false
+    tradeoff: No first-party Google Cloud email-sending service; use a third-party provider or SMTP relay.
+    risk: Sender verification, deliverability reputation and bounce handling must be rebuilt with whichever provider is chosen.
+    docs: https://cloud.google.com/docs/get-started/aws-azure-gcp-service-comparison

@@ -20,6 +20,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 import streamlit as st  # noqa: E402
+import streamlit.components.v1 as components  # noqa: E402
 from dotenv import load_dotenv  # noqa: E402
 
 from migratelens.cache import Cache  # noqa: E402
@@ -33,8 +34,31 @@ LIVE_RUNS_PER_DAY = 15  # whole-app daily cap on live analyses (protects the fre
 LIVE_RUNS_PER_SESSION = 2
 LIVE_CALLS_PER_DAY = 250  # model-call cap for the whole app
 REPO_URL = "https://github.com/abhibarnwal707/MigrateLens"
+SITE_URL = "https://abhibarnwal707.github.io/MigrateLens/"  # the designed site (site/ in this repo)
 
 st.set_page_config(page_title="MigrateLens", page_icon="🔭", layout="wide")
+
+
+def render_site() -> None:
+    """Show the designed website (site/, on GitHub Pages) full-screen, no Streamlit chrome."""
+    st.markdown(
+        """<style>
+        header[data-testid="stHeader"], [data-testid="stToolbar"], [data-testid="stDecoration"],
+        [data-testid="stSidebar"], footer { display: none !important; }
+        [data-testid="stMainBlockContainer"], .block-container {
+            padding: 0 !important; max-width: none !important; }
+        iframe { position: fixed; inset: 0; width: 100vw !important; height: 100vh !important;
+                 border: 0; z-index: 1000; background: #191919; }
+        </style>""",
+        unsafe_allow_html=True,
+    )
+    components.iframe(SITE_URL, height=900, scrolling=True)
+
+
+# The default view is the website; ?view=analyse is the live analysis tool it links to.
+if st.query_params.get("view") != "analyse":
+    render_site()
+    st.stop()
 
 
 def _secret_key() -> bool:
@@ -178,7 +202,8 @@ def show(data: dict) -> None:
         )
 
 
-st.title("🔭 MigrateLens")
+st.markdown('<a href="/" target="_self">← Back to the MigrateLens site</a>', unsafe_allow_html=True)
+st.title("Analyse an AWS repo")
 st.write("An AWS → Google Cloud migration copilot built on Google's ADK and Gemini.")
 st.warning("**Generated Terraform is validated, not deployed.** Nothing here touches Google Cloud.")
 st.info(

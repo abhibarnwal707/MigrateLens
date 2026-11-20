@@ -1,0 +1,7 @@
+# Match the website's palette (site/style.css): charcoal ground, teal accent, white ink.
+[theme]
+base = "dark"
+primaryColor = "#0c7866"
+backgroundColor = "#191919"
+secondaryBackgroundColor = "#242424"
+textColor = "#ffffff"
